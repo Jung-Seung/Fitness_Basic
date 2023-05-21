@@ -1,0 +1,9 @@
+#board-list{
+    width:95%;
+    height:auto;
+    /* background-color:aquamarine; */
+    margin:0 auto;
+}
+#board-list>#list-header{
+    background-color: #909090;
+}
