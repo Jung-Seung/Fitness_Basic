@@ -30,7 +30,7 @@ class Teach extends Component {
       const formData = new FormData();
       formData.append("profile", file);
   
-      const uploadResponse = await axios.post("/api/upload", formData, {
+      const uploadResponse = await axios.post("/person/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
