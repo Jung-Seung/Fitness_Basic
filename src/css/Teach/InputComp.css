@@ -1,0 +1,12 @@
+#input-comp{
+    width:100%;
+    height:auto;
+    background-color: #E8E8E8;
+    margin:0 auto;
+}
+#input-comp>#input-header{
+    font-size: x-large;
+}
+/* #input-comp>#input-btn{
+    float:right;
+} */
