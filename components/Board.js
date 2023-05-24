@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../css/Board.css";
 import BoardList from "./Board/BoardList.js"
-import Pagination from "./Board/Pagination.js";
+import Pagination from "./Pagination.js";
 import axios from "axios";
 import NewBoard from "./Board/NewBoard.js";
 

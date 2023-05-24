@@ -42,8 +42,8 @@ class BoardDetail extends Component {
       });
   };
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
+  handleInputChange = (e) => {
+    const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 

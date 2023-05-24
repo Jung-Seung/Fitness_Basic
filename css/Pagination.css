@@ -1,0 +1,35 @@
+#pagination{
+    width:95%;
+    height:80px;
+    /* background-color:antiquewhite; */
+    margin:0 auto;
+    text-align:center;
+    padding-top:40px;
+    box-sizing: border-box;
+}
+#pagination-inner{
+    display:inline-block;
+    background-color:white;
+}
+#page{
+    display:inline-block;
+    width:30px;
+    height:30px;
+    border:1px solid #333;
+    color:#333;
+    background-color:white;
+    margin-left:5px;
+    margin-right:5px;
+    text-align:center;
+    padding-top:3px;
+    box-sizing:border-box;
+    cursor:pointer;
+}
+#page:hover{
+    background-color:#333;
+    color:#fff;
+}
+.active{
+    background-color:#333 !important;
+    color:#fff !important;
+}
