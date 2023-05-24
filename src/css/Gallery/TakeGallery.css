@@ -1,0 +1,38 @@
+#takegallery{
+    width:100%;
+    height:40px;
+    /* background-color:blanchedalmond; */
+    margin-bottom:1px;
+    border-bottom:1px solid #222328;
+}
+#takegallery>span{
+    float:left;
+    height:100%;
+}
+
+#takegallery>span:first-child{
+    width:55%;
+    padding:5px 10px;
+    box-sizing:border-box;
+    text-align:left;
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+#takegallery>span:nth-child(2){
+    width:15%;
+    padding:5px 10px;
+    box-sizing:border-box;
+    text-align:center;
+}
+#takegallery>span:nth-child(3){
+    width:15%;
+    padding:5px 10px;
+    box-sizing:border-box;
+    text-align:center;
+}
+#takegallery>span:last-child{
+    width:30%;
+    padding:5px 10px;
+    box-sizing:border-box;
+    text-align:center;
+}
