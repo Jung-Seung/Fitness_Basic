@@ -1,9 +1,9 @@
 const multer = require("multer");
 const path = require("path");
 
-const storagePerson = multer.diskStorage({
+const storageGallery = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, '../../public/uploads/person');
+    cb(null, '../../public/uploads/gallery');
     // 파일이 저장되는 경로입니다.
   },
   filename: function(req, file, cb) {
@@ -15,6 +15,6 @@ const storagePerson = multer.diskStorage({
   }
 });
 
-const personUpload = multer({ storage: storagePerson }).single('profile');
+const galleryPatch = multer({ storage: storageGallery }).single('img');
 
-module.exports = personUpload;
+module.exports = galleryPatch;
