@@ -1,35 +1,48 @@
-import '../../css/Gallery/NewGallery.css';
 import React, { Component } from "react";
 import axios from "axios";
+import "../../css/Gallery/NewGallery.css";
 
 class NewGallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newTitle: "",
+      newImg: null,
       newContents: "",
       newWriter: "",
       newWriteDate: "",
     };
   }
 
-  handleCreateGallery = () => {
-    const { newTitle, newContents, newWriter, newWriteDate } = this.state;
-    axios
-      .post("/gallery", {
+  handleCreateGallery = async () => {
+    const { newTitle, newImg, newContents, newWriter, newWriteDate } = this.state;
+
+    try {
+      const formData = new FormData();
+      formData.append("img", newImg);
+
+      const uploadResponse = await axios.post("/gallery/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      const { imgName } = uploadResponse.data;
+
+      await axios.post("/gallery", {
         title: newTitle,
+        img: imgName,
         contents: newContents,
         writer: newWriter,
         writeDate: newWriteDate,
-      })
-      .then((response) => {
-        console.log("Gallery created:", response.data);
-        this.props.fetchGalleryList();
-        this.resetForm();
-      })
-      .catch((error) => {
-        console.error("Error creating gallery:", error);
       });
+
+      this.resetForm();
+      this.props.fetchGalleryList();
+    } catch (error) {
+      console.error("Error creating gallery:", error);
+      alert("이미지가 업로드되지 않았습니다.");
+    }
   };
 
   handleDeleteGallery = (no) => {
@@ -47,19 +60,39 @@ class NewGallery extends Component {
   resetForm = () => {
     this.setState({
       newTitle: "",
+      newImg: null,
       newContents: "",
       newWriter: "",
       newWriteDate: "",
     });
   };
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+  handleImgSelect = (e) => {
+    const file = e.target.files[0];
+    const imgName = e.target.value;
+    if (file) {
+      const allowedTypes = ["image/jpeg", "image/png"];
+      if (allowedTypes.includes(file.type)) {
+        this.setState({ file, imgName });
+      } else {
+        console.error("Invalid file type. Please select a JPEG or PNG image.");
+        alert("유효하지 않은 이미지 유형입니다. JPEG 또는 PNG 파일을 사용해주세요.");
+      }
+    } else {
+      console.error("No img selected. Please choose an image.");
+      alert("이미지가 선택되지 않았습니다. 이미지를 첨부해주세요.");
+    }
+  };
+
+  handleInputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
   };
 
   render() {
-    const { newTitle, newContents, newWriter, newWriteDate } = this.state;
+    const { newTitle, imgName, newContents, newWriter, newWriteDate } = this.state;
 
     return (
       <div id="new-gallery">
@@ -71,6 +104,16 @@ class NewGallery extends Component {
             id="newTitle"
             name="newTitle"
             value={newTitle}
+            onChange={this.handleInputChange}
+          />
+        </div>
+        <div id="new-img">
+          <label htmlFor="img">이미지:</label>
+          <input
+            type="file"
+            id="img"
+            name="img"
+            value={imgName}
             onChange={this.handleInputChange}
           />
         </div>
@@ -104,8 +147,8 @@ class NewGallery extends Component {
           />
         </div>
         <div id="Scbutton">
-          <button onClick={this.handleCreateGallery}><a href="/gallery">저장</a></button>
-          <button onClick={this.resetForm}><a href="/gallery">취소</a></button>
+          <button onClick={this.handleCreateGallery}>저장</button>
+          <button onClick={this.resetForm}>취소</button>
         </div>
       </div>
     );

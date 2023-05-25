@@ -1,43 +1,40 @@
 import '../css/Gallery.css';
-import React, { Component } from 'react'
-import GalleryList from './Gallery/GalleryList.js'
-import Pagination from './Pagination.js'
-import NewGallery from "./Gallery/NewGallery.js"
+import React, { Component } from 'react';
+import GalleryList from './Gallery/GalleryList.js';
+import Pagination from './Pagination.js';
+import Input from './Gallery/Input.js';
 import axios from 'axios';
 
 class Gallery extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       galleryList: [],
-      galleryPerPage: 4,
+      galleryPerPage: 6,
       currentPage: 1,
       showNewGallery: false
-    }
+    };
   }
 
   componentDidMount() {
     this.fetchGalleryList();
   }
 
-  fetchGallerydList = () => {
-    const { galleryPerPage, currentPage } = this.state;
-    const offset = (currentPage - 1) * galleryPerPage;
-    const apiUrl = `/gallery?limit=${galleryPerPage}&offset=${offset}`;
-
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        this.setState({ galleryList: response.data });
-      })
-      .catch((error) => {
-        console.error("Error fetching gallery list:", error);
-      });
-  };
+  fetchGalleryList = async () => {
+    try{
+      const { galleryPerPage, currentPage } = this.state;
+      const offset = (currentPage - 1) * galleryPerPage;
+      const apiUrl = `/gallery?limit=${galleryPerPage}&offset=${offset}`; // http://localhost:3000
+      const response = await axios.get(apiUrl)
+      this.setState({ galleryList: response.data });
+    } catch(error) {
+      console.error("갤러리 목록을 가져오는 중 오류 발생:", error);
+    }
+  }
 
   handleToggleNewGallery = () => {
     this.setState((prevState) => ({
-      showNewgallery: !prevState.showNewGallery,
+      showNewGallery: !prevState.showNewGallery,
     }));
   };
 
@@ -64,8 +61,8 @@ class Gallery extends Component {
       );
     }
 
-    const totalGallerys = galleryList.length;
-    const lastPage = Math.ceil(totalGallerys / galleryPerPage);
+    const totalGalleries = galleryList.length;
+    const lastPage = Math.ceil(totalGalleries / galleryPerPage);
 
     if (currentPage > lastPage) {
       this.setState({ currentPage: lastPage }, () => {
@@ -74,7 +71,10 @@ class Gallery extends Component {
     }
 
     if (showNewGallery) {
-      return <NewGallery fetchGalleryList={this.fetchGalleryList} />;
+      return (
+      <Input
+      fetchGalleryList={this.fetchGalleryList}/>
+      )
     }
 
     const indexOfLastGallery = currentPage * galleryPerPage;
@@ -91,12 +91,13 @@ class Gallery extends Component {
 
     return (
       <div id="gallery">
-        <GalleryList galleryList={formattedGalleryList} />
+        <GalleryList 
+        galleryList={formattedGalleryList} />
         <Pagination
-          total={totalGallerys}
+          total={totalGalleries}
           itemsPerPage={galleryPerPage}
           currentPage={currentPage}
-          onPageChange={this.handlePageChange} // setCurrentPage 대신 onPageChange를 전달
+          onPageChange={this.handlePageChange}
         />
         <div id="new-write">
           <button onClick={this.handleToggleNewGallery}>새 포스팅</button>

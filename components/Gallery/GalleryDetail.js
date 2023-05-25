@@ -1,18 +1,31 @@
-import React, { Component } from 'react';
-import '../../css/Gallery/GalleryDetail.css';
-import axios from 'axios';
+import React, { Component } from "react";
+import "../../css/Gallery/GalleryDetail.css";
+import axios from "axios";
 
 class GalleryDetail extends Component {
   constructor(props) {
     super(props);
-    const { gallery } = props;
     this.state = {
       showEditForm: false,
-      title: gallery.title,
-      contents: gallery.contents,
-      writer: gallery.writer,
-      writeDate: gallery.writeDate,
+      title: "",
+      file: null,
+      imgPreview: null,
+      contents: "",
+      writer: "",
+      writeDate: "",
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      const { title, contents, writer, writeDate } = this.props;
+      this.setState({
+        title,
+        contents,
+        writer,
+        writeDate,
+      });
+    }
   }
 
   handleBackClick = () => {
@@ -23,8 +36,15 @@ class GalleryDetail extends Component {
   };
 
   handleEditClick = () => {
+    const { gallery } = this.props;
+    const { title, contents, writer, writeDate } = gallery;
+  
     this.setState((prevState) => ({
       showEditForm: !prevState.showEditForm,
+      title,
+      contents,
+      writer,
+      writeDate,
     }));
   };
 
@@ -33,55 +53,84 @@ class GalleryDetail extends Component {
     axios
       .delete(`/gallery/${gallery.no}`)
       .then((response) => {
-        alert('게시글이 삭제되었습니다.');
-        onDelete(gallery.no); // 삭제된 게시글의 ID를 상위 컴포넌트로 전달
-        console.log('Gallery deleted successfully:', response.data);
+        alert("게시글이 삭제되었습니다.");
+        onDelete(gallery.no);
+        console.log("Gallery deleted successfully:", response.data);
       })
       .catch((error) => {
-        console.error('Error deleting gallery:', error);
+        console.error("Error deleting gallery:", error);
       });
+  };
+
+  handleImgSelect = (e) => {
+    const file = e.target.files[0];
+    const imgPreview = URL.createObjectURL(file);
+    if (file) {
+      // 파일 유효성 검사 로직 추가
+      const allowedTypes = ["image/jpeg", "image/png"]; // 허용된 파일 유형
+      if (allowedTypes.includes(file.type)) {
+        // 유효한 파일 유형인 경우
+        this.setState({ file, imgPreview });
+      } else {
+        // 유효하지 않은 파일 유형인 경우에 대한 처리
+        console.error("Invalid file type. Please select a JPEG or PNG image.");
+        // 파일 선택을 초기화하거나 사용자에게 알림을 표시할 수 있습니다.
+        alert(
+          "유효하지 않은 이미지 유형입니다. JPEG 또는 PNG 파일을 사용해주세요."
+        );
+      }
+    } else {
+      // 파일 선택하지 않은 경우에 대한 처리
+      console.error("No img selected. Please choose an image.");
+      // 사용자에게 알림을 표시할 수 있습니다.
+      alert("이미지가 선택되지 않았습니다. 이미지를 첨부해주세요.");
+    }
   };
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState({
+      [name]: value,
+    });
   };
 
   handleUpdateClick = () => {
     const { gallery, onUpdate } = this.props;
-    const { title, contents, writer, writeDate } = this.state;
-    const updatedGallery = { ...gallery, title, contents, writer, writeDate };
+    const { title, file, contents, writer, writeDate } = this.state;
+
+    const updatedGallery = new FormData();
+    updatedGallery.append("title", title);
+    if (file) {
+      updatedGallery.append("img", file);
+    }
+    updatedGallery.append("contents", contents);
+    updatedGallery.append("writer", writer);
+    updatedGallery.append("writeDate", writeDate);
+
     axios
       .put(`/gallery/${gallery.no}`, updatedGallery)
       .then((response) => {
-        alert('게시글이 수정되었습니다.');
-        onUpdate(updatedGallery); // 수정된 게시글 정보를 상위 컴포넌트로 전달
+        alert("게시글이 수정되었습니다.");
+        onUpdate(updatedGallery);
         this.setState({ showEditForm: false });
-        console.log('Gallery updated successfully:', response.data);
+        console.log("Gallery updated successfully:", response.data);
       })
       .catch((error) => {
-        console.error('Error updating gallery:', error);
+        console.error("Error updating gallery:", error);
       });
   };
 
-  componentDidMount() {
-    // 게시글 목록 데이터를 서버에서 가져와 설정
-    axios
-      .get('/gallery')
-      .then((response) => {
-        this.setState({
-            galleryList: response.data,
-        });
-        console.log('Gallery list retrieved successfully:', response.data);
-      })
-      .catch((error) => {
-        console.error('Error retrieving gallery list:', error);
-      });
-  }
-
   render() {
     const { gallery } = this.props;
-    const { showEditForm, title, contents, writer, writeDate } = this.state;
+    const {
+      showEditForm,
+      title,
+      imgPreview,
+      contents,
+      writer,
+      writeDate,
+    } = this.state;
+    const show = `/uploads/gallery/${gallery.img}`;
 
     if (!gallery) {
       return <div>Loading...</div>;
@@ -90,8 +139,8 @@ class GalleryDetail extends Component {
     return (
       <div id="gallery-detail">
         {showEditForm ? (
-          <form id='re-gallery'>
-            <div id='re-title'>
+          <form id="re-gallery">
+            <div id="gal-title">
               <label htmlFor="title">제목:</label>
               <input
                 type="text"
@@ -101,7 +150,19 @@ class GalleryDetail extends Component {
                 onChange={this.handleInputChange}
               />
             </div>
-            <div id='re-contents'>
+            <div id="gal-img">
+              <label htmlFor="img">이미지:</label>
+              <input
+                type="file"
+                id="img"
+                name="img"
+                onChange={this.handleImgSelect}
+              />
+              <div id="show-imgpre">
+                {imgPreview && <img src={imgPreview} alt="show-imgpre" />}
+              </div>
+            </div>
+            <div id="gal-contents">
               <label htmlFor="contents">내용:</label>
               <textarea
                 id="contents"
@@ -110,7 +171,7 @@ class GalleryDetail extends Component {
                 onChange={this.handleInputChange}
               ></textarea>
             </div>
-            <div id='re-writer'>
+            <div id="gal-writer">
               <label htmlFor="writer">작성자:</label>
               <input
                 type="text"
@@ -120,7 +181,7 @@ class GalleryDetail extends Component {
                 onChange={this.handleInputChange}
               />
             </div>
-            <div id='re-writeDate'>
+            <div id="gal-writeDate">
               <label htmlFor="writeDate">작성일:</label>
               <input
                 type="date"
@@ -136,6 +197,9 @@ class GalleryDetail extends Component {
         ) : (
           <>
             <div id="title">{gallery.title}</div>
+            <div id="img">
+              <img src={show} alt="gallery-img" />
+            </div>
             <div id="contents">{gallery.contents}</div>
             <div id="writer">{gallery.writer}</div>
             <div id="writeDate">{gallery.writeDate}</div>

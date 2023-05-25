@@ -1,6 +1,6 @@
 import '../css/Footer.css';
 import insta from '../images/instagram.png';
-import blog from '../images/블로그2.png';
+import blog from '../images/blog.png';
 
 function Footer(){
     return(

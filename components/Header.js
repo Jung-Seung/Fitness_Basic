@@ -28,7 +28,7 @@ function Header(){
                     </li>
                     <li>
                         <a href='/contact'>
-                            오시는길
+                            오시는길/문의
                         </a>
                     </li>
                 </ul>

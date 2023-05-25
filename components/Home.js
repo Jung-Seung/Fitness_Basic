@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/Home.css";
 import Slide from "./Slide.js";
 import openimg from "../images/open-img.PNG";
+import SNBB from "../video/SNBB.mp4";
 import axios from "axios";
 
 function Home() {
@@ -31,15 +32,17 @@ function Home() {
   return (
     <div id="home">
       <div id="movie">
-        동영상
-        <div id="slide">
-          <Slide />
-        </div>
-        <div id="open-time">
-          <div id="open-header">· 운영시간</div>
-          <div id="open-img">
-            <img src={openimg} alt="opentime" />
-          </div>
+        <video controls width="525px" height="410px" autoPlay>
+          <source src={SNBB} type="video/mp4"/>
+        </video>
+      </div>
+      <div id="slide">
+        <Slide />
+      </div>
+      <div id="open-time">
+        <div id="open-header">· 운영시간</div>
+        <div id="open-img">
+          <img src={openimg} alt="opentime" />
         </div>
       </div>
       <div id="boardinfo">

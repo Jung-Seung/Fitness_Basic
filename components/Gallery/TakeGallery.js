@@ -3,20 +3,26 @@ import '../../css/Gallery/TakeGallery.css';
 
 const TakeGallery = (props) => {
   const handleClick = () => {
-    props.onClick({
-      no: props.no,
-      title: props.title,
-      writer: props.writer,
-      writeDate: props.writeDate,
-    });
+    const { no, title, img, contents, writer, writeDate } = props;
+    const galleryData = {
+      no,
+      title,
+      img,
+      contents,
+      writer,
+      writeDate
+    };
+    props.onClick(galleryData);
   };
+
+  const imgSrc = props.img ? `/uploads/gallery/${props.img}` : '';
 
   return (
     <div id="takegallery" onClick={handleClick}>
-      {/* <span>{props.no}</span> */}
-      <span>{props.title}</span>
-      <span>{props.writer}</span>
-      <span>{props.writeDate}</span>
+      <div>{props.title}</div>
+      <div><img src={imgSrc} alt="Gallery" /></div>
+      <div>{props.contents}</div>
+      <div>{props.writer} {props.writeDate}</div>
     </div>
   );
 };
