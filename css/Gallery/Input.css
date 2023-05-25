@@ -1,0 +1,71 @@
+#input {
+  width: 1100px;
+  height: auto;
+  /* height:500px; */
+  margin: 0 auto;
+  background-color: #f2f2f2;
+}
+#input > #input-head {
+  font-size: x-large;
+}
+#input > #input-title {
+  width: auto;
+  height: auto;
+  text-align: center;
+  margin-bottom: 10px;
+  background-color: #f2f2f2;
+}
+#input-title > input {
+  position: relative;
+  left: 20px;
+  width: auto;
+}
+#input > #input-img {
+  width: auto;
+  height: auto;
+}
+#input-img > #show-img {
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  margin: 0 auto;
+}
+#input-img > #show-img> img{
+    width:100%;
+    height:100%;
+}
+#input > #input-contents {
+  width: 1000px;
+  height: 280px;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+#input-contents > label {
+  position: relative;
+  top: 100px;
+}
+#input-contents > textarea {
+  width: 400px;
+  height: auto;
+  position: relative;
+  top: 110px;
+  left: 10px;
+}
+#input > #input-write {
+  width: 300px;
+  height: 30px;
+  background-color: #f2f2f2;
+}
+#input-write > input {
+  position: relative;
+  left: 10px;
+}
+#input > #input-writeDate {
+  width: 300px;
+  height: 30px;
+  background-color: #f2f2f2;
+}
+#input-writeDate > input {
+  position: relative;
+  left: 10px;
+}

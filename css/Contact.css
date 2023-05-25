@@ -1,7 +1,7 @@
 #contact {
     width:1180px;
     height:550px;
-    background-color:beige;
+    background-color:#E8E8E8;
     margin:0 auto;
 }
 #kakao{
@@ -10,7 +10,7 @@
     top:25px;
     width:500px;
     height:500px;
-    background-color: coral;
+    /* background-color: coral; */
 }
 #add{
     position:relative;
@@ -18,7 +18,7 @@
     bottom:400px;
     width:500px;
     height:30px;
-    background-color: aqua;
+    /* background-color: aqua; */
     font-size: large;
     font-weight: bold;
 }
@@ -27,5 +27,5 @@
     top:30px;
     width:600px;
     height:100px;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
 }
