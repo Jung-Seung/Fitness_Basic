@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 4000;
 const db = require("../config/db.js");
 
 app.use(express.json());
+app.use(express.static("build"));
 app.use(express.urlencoded({ extended: false }));
 
 //board

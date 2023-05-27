@@ -1,0 +1,37 @@
+#footer{
+    width:1200px;
+    height:auto;
+}
+#footer>#footer-logo{
+    width:80px;
+    height: 30px;
+}
+#footer-logo>#insta{
+    width:30px;
+    height: 30px;
+    position: relative;
+    left:1080px;
+    bottom:15px;
+}
+#footer-logo>#insta>a>img{
+    width:100%;
+    height:100%;
+}
+#footer-logo>#blog{
+    width:30px;
+    height: 30px;
+    position: relative;
+    left:1150px;
+    bottom:45px;
+}
+#footer-logo>#blog>a>img{
+    width:100%;
+    height:100%;
+}
+#footer>#num{
+    width:200px;
+    height:30px;
+    position: relative;
+    left:1020px;
+    bottom:10px;
+}

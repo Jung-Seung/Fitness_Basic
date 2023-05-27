@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cefceb0a.css",
+    "main.js": "/static/js/main.32ae2768.js",
+    "static/js/651.6ef07fec.chunk.js": "/static/js/651.6ef07fec.chunk.js",
+    "static/media/SNBB.mp4": "/static/media/SNBB.14f1c96ee0bc18d564ee.mp4",
+    "static/media/instagram.png": "/static/media/instagram.f6ae0ba2d59d79a3e08d.png",
+    "static/media/into_1.jpg": "/static/media/into_1.39052443d59becc9fcbc.jpg",
+    "static/media/Price.png": "/static/media/Price.4953a0bc21677ca60547.png",
+    "static/media/fitness basic.jpg": "/static/media/fitness basic.a3367221b8804fd5f2d5.jpg",
+    "static/media/blog.png": "/static/media/blog.7c4d1ab2195f65089a0a.png",
+    "static/media/open-img.PNG": "/static/media/open-img.4fc0a9e9ae760209082d.PNG",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.cefceb0a.css.map": "/static/css/main.cefceb0a.css.map",
+    "main.32ae2768.js.map": "/static/js/main.32ae2768.js.map",
+    "651.6ef07fec.chunk.js.map": "/static/js/651.6ef07fec.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cefceb0a.css",
+    "static/js/main.32ae2768.js"
+  ]
+}
