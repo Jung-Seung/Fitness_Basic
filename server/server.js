@@ -3,7 +3,7 @@ const app = express();
 const personUpload = require("./fileUpload.js");
 const galleryPatch = require("./galleryUpload.js")
 const PORT = process.env.PORT || 4000;
-const db = require("../config/db.js");
+const db = require("./config/db.js");
 
 app.use(express.json());
 app.use(express.static("build"));
