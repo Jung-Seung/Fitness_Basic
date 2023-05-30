@@ -2,7 +2,9 @@
 안녕하세요. 
 
 # 계획
-
+<p align="center">
+ <img src="client/src/images/Design(최종).PNG" width="300">
+</p>
 
 # 버전업된 모습
 
