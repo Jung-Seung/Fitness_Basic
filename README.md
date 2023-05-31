@@ -15,7 +15,7 @@
 
 ### 클라이언트 스펙
  - `React`
- - 'JavaScript'
+ - `JavaScript`
 
 ### 백엔드 스펙  
  - `Node.js`
