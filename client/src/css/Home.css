@@ -8,10 +8,12 @@
     left: 20px;
     top:50px;
     width:525px;
-    height:410px;
-    background-color:antiquewhite;
+    height:420px;
+    /* background-color:antiquewhite; */
 }
-#movie>video{
+#movie> video{
+    position: relative;
+    bottom: 20px;
     width:100%;
     height:100%;
 }
@@ -22,7 +24,7 @@
     margin-left:535px;
     width:350px;
     height:260px;
-    background-color:aquamarine;
+    /* background-color:aquamarine; */
 }
 #open-time{
     position:relative;
