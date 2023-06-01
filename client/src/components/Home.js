@@ -32,7 +32,7 @@ function Home() {
   return (
     <div id="home">
       <div id="movie">
-        <video controls width="525px" height="410px" autoPlay>
+        <video controls width="525px" height="430px" autoPlay>
           <source src={SNBB} type="video/mp4"/>
         </video>
       </div>
